@@ -168,4 +168,90 @@ public class Gameboard
 		bd.append("---------------");
 		return bd.toString();
 	}
+	
+	/**
+	 * Loops through the rows of the board to see if either player has won. 
+	 * For a player to win, they must have placed four of their marks in a row.
+	 * @return 0 if neither player has won, 1 if player 1 has won, or 2 if player 2 has won. 
+	 */
+	private int checkRows()
+	{
+		char p1Mark = p1.getMark();
+		char p2Mark = p2.getMark();
+		for ( int row = 0; row < board.length; row++ )
+		{
+			int p1Count = 0;
+			int p2Count = 0;
+			for ( int col = 0; col < board[row].length; col++ )
+			{
+				if ( board[row][col] == p1Mark )
+				{
+					p1Count++;
+					p2Count = 0;
+				}
+				else if ( board[row][col] == p2Mark )
+				{
+					p2Count++;
+					p1Count = 0;
+				}
+				else
+				{
+					p1Count = 0;
+					p2Count = 0;
+				}
+				if ( p1Count == 4 )
+				{
+					return 1;
+				}
+				else if ( p2Count == 4 )
+				{
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	/**
+	 * Loops through the columns of the board to see if either player has won. 
+	 * For a player to win, they must have placed four of their marks in a row. 
+	 * @return 0 if neither player has won, 1 if player 1 has won, or 2 if player 2 has won. 
+	 */
+	private int checkCols() 
+	{
+		char p1Mark = p1.getMark();
+		char p2Mark = p2.getMark();
+		for ( int col = 0; col < board[0].length; col++ )
+		{
+			int p1Count = 0;
+			int p2Count = 0;
+			for ( int row = 0; row < board.length; row++ )
+			{
+				if ( board[row][col] == p1Mark )
+				{
+					p1Count++;
+					p2Count = 0;
+				}
+				else if ( board[row][col] == p2Mark )
+				{
+					p2Count++;
+					p1Count = 0;
+				}
+				else
+				{
+					p1Count = 0;
+					p2Count = 0;
+				}
+				if ( p1Count == 4 )
+				{
+					return 1;
+				}
+				else if ( p2Count == 4 )
+				{
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
 }
