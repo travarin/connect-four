@@ -255,6 +255,11 @@ public class Gameboard
 		return 0;
 	}
 
+	/**
+	 * Checks to see if either player has won diagonally.
+	 * For a player to win, they must have placed four of their marks in a row.
+	 * @return 0 if neither player has won, 1 if player 1 has won, or 2 if player 2 has won.
+	 */
 	private int checkDiag()
 	{
 		char p1Mark = p1.getMark();
@@ -262,37 +267,60 @@ public class Gameboard
 		int p1Count, p2Count;
 		for ( int startCol = 0; startCol < board[0].length-3; startCol++ )
 		{
-			for ( int startRow = 4; startRow < board.length; startRow++ )
+			for ( int startRow = 3; startRow < board.length; startRow++ )
 			{
 				p1Count = 0;
 				p2Count = 0;
 				int col = startCol;
-				for ( int row = startRow; row >= 0; row-- )
+				for ( int row = startRow; row > startRow-4; row-- )
 				{
 					if ( board[row][col] == p1Mark )
 					{
 						p1Count++;
-						p2Count = 0;
 					}
 					else if ( board[row][col] == p2Mark )
 					{
 						p2Count++;
-						p1Count = 0;
-					}
-					else
-					{
-						p1Count = 0;
-						p2Count = 0;
-					}
-					if ( p1Count == 4 )
-					{
-						return 1;
-					}
-					else if ( p2Count == 4 )
-					{
-						return 2;
 					}
 					col++;
+				}
+				if ( p1Count == 4 )
+				{
+					return 1;
+				}
+				else if ( p2Count == 4 )
+				{
+					return 2;
+				}
+			}
+		}
+
+		for ( int startCol = board.length-1; startCol > 2; startCol++ )
+		{
+			for ( int startRow = 3; startRow < board.length; startRow++ )
+			{
+				p1Count = 0;
+				p2Count = 0;
+				int col = startCol;
+				for ( int row = startRow; row > startRow-4; row-- )
+				{
+					if ( board[row][col] == p1Mark )
+					{
+						p1Count++;
+					}
+					else if ( board[row][col] == p2Mark )
+					{
+						p2Count++;
+					}
+					col--;
+				}
+				if ( p1Count == 4 )
+				{
+					return 1;
+				}
+				else if ( p2Count == 4 )
+				{
+					return 2;
 				}
 			}
 		}
