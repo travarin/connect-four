@@ -185,29 +185,35 @@ public class Gameboard
 	 */
 	public boolean gameOver()
 	{
-		int checkRows = checkRows();
-		int checkCols = checkCols();
-		int checkDiag = checkDiag();
+		int     checkRows = checkRows();
+		int     checkCols = checkCols();
+		int     checkDiag = checkDiag();
+		boolean gameOver  = false;
 		if ( checkRows == 1 || checkCols == 1 || checkDiag == 1 )
 		{
 			System.out.println("Player " + p1.getName() + " Wins!");
 			p1.setGamesWon();
-			return true;
+			gameOver = true;
 		}
 		else if ( checkRows == 2 || checkCols == 2 || checkDiag == 2 )
 		{
 			System.out.println("Player " + p2.getName() + " Wins!");
 			p2.setGamesWon();
-			return true;
+			gameOver = true;
 		}
 		else if ( isTie() )
 		{
 			System.out.println("The Game is a Tie!");
 			p1.setGamesTied();
 			p2.setGamesTied();
-			return true;
+			gameOver = true;
 		}
-		return false;
+		if ( gameOver )
+        {
+            System.out.println("\n" + p1);
+            System.out.println("\n" + p2);
+        }
+		return gameOver;
 	}
 	
 	/**

@@ -24,6 +24,8 @@ public class ConnectFour
                 System.out.println(board);
                 board.move();
             }
+            System.out.println(board);
+            board.reset();
             System.out.println("Enter Y to keep playing: ");
             keepPlaying = rdIn.next().equals("Y") ? true : false;
         }
