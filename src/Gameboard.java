@@ -146,7 +146,7 @@ public class Gameboard
 		boolean placed = false;
 		while ( row > -1 && !placed )
 		{
-			if ( board[row][col] == 0 )
+			if ( board[row][col] == ' ' )
 			{
 				board[row][col] = mark;
 				placed = true;
