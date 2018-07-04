@@ -311,8 +311,8 @@ public class Gameboard
 	{
 		char p1Mark = p1.getMark();
 		char p2Mark = p2.getMark();
-		int p1Count, p2Count;
-		for ( int startRow = 3; startRow < 6; startRow++ )
+		int  p1Count, p2Count;
+		for ( int startRow = 3; startRow < board.length; startRow++ )
         {
             for ( int startCol = 0; startCol < 4; startCol++ )
             {
@@ -343,7 +343,7 @@ public class Gameboard
                 }
             }
 
-            for ( int startCol = 6; startCol > 2; startCol-- )
+            for ( int startCol = board[0].length-1; startCol > 2; startCol-- )
             {
                 p1Count = 0;
                 p2Count = 0;
@@ -372,67 +372,6 @@ public class Gameboard
                 }
             }
         }
-        /*
-		for ( int startCol = 0; startCol < board[0].length-3; startCol++ )
-		{
-			for ( int startRow = 3; startRow < board.length; startRow++ )
-			{
-				p1Count = 0;
-				p2Count = 0;
-				int col = startCol;
-				for ( int row = startRow; row > startRow-4; row-- )
-				{
-					if ( board[row][col] == p1Mark )
-					{
-						p1Count++;
-					}
-					else if ( board[row][col] == p2Mark )
-					{
-						p2Count++;
-					}
-					col++;
-				}
-				if ( p1Count == 4 )
-				{
-					return 1;
-				}
-				else if ( p2Count == 4 )
-				{
-					return 2;
-				}
-			}
-		}
-
-		for ( int startCol = board.length-1; startCol > 2; startCol++ )
-		{
-			for ( int startRow = 3; startRow < board.length; startRow++ )
-			{
-				p1Count = 0;
-				p2Count = 0;
-				int col = startCol;
-				for ( int row = startRow; row > startRow-4; row-- )
-				{
-					if ( board[row][col] == p1Mark )
-					{
-						p1Count++;
-					}
-					else if ( board[row][col] == p2Mark )
-					{
-						p2Count++;
-					}
-					col--;
-				}
-				if ( p1Count == 4 )
-				{
-					return 1;
-				}
-				else if ( p2Count == 4 )
-				{
-					return 2;
-				}
-			}
-		}
-		*/
 		return 0;
 	}
 
