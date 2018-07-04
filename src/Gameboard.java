@@ -163,17 +163,17 @@ public class Gameboard
 	public String toString()
 	{
 		StringBuilder bd = new StringBuilder();
-		bd.append("-------------\n");
+		bd.append("---------------\n");
 		for ( int row = 0; row < board.length; row++ )
 		{
 			bd.append("|");
-			for ( int col = 0; col < board.length; col++)
+			for ( int col = 0; col < board[row].length; col++)
 			{
 			    bd.append(board[row][col] + "|");
 			}
 			bd.append("\n");
 		}
-		bd.append("-------------");
+		bd.append("---------------");
 		return bd.toString();
 	}
 
