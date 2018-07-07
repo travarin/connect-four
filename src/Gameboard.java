@@ -18,21 +18,33 @@ public class Gameboard
 	private Player  p2;
 	private Scanner rdIn;
 	private int     turn;
+	private boolean computer;
 	
 	/**
 	 * Starts the game. Generates a random number to assign the first marks to each player. 
 	 * Then reads in the names for each player, and initializes the player objects. 
 	 * Finally, initializes the board. 
 	 */
-	public void start()
+	public void start(boolean computer)
 	{
+	    this.computer = computer;
 		int mark = (int) Math.random(); 
 		
 		rdIn = new Scanner(System.in);
 		System.out.print("\nPlayer 1 enter name: ");
 		p1 = new Player(rdIn.next(), mark == 0 ? 'X' : 'O');
-		System.out.print("\nPlayer 2 enter name: ");
-		p2 = new Player(rdIn.next(), mark == 0 ? 'O' : 'X');
+
+		String name;
+		if ( computer )
+        {
+            name = "Skynet";
+        }
+        else
+        {
+            System.out.print("\nPlayer 2 enter name: ");
+            name = rdIn.next();
+        }
+		p2 = new Player(name, mark == 0 ? 'O' : 'X');
 		
 		board = new char[6][7];
 		clearBoard();
@@ -95,10 +107,14 @@ public class Gameboard
 		{
 			readMoves(p1);
 		}
-		else
+		else if ( !computer )
 		{
 			readMoves(p2);
 		}
+		else
+        {
+            computerMove(p2);
+        }
 		setTurn();
 	}
 	
@@ -118,6 +134,20 @@ public class Gameboard
 		}
 		placeMove(col, p.getMark());
 	}
+
+    /**
+     * Has the computer player move by randomly choosing a column to place the mark in.
+     * @param p: The computer player whose move is being placed.
+     */
+    private void computerMove(Player p)
+    {
+        int col = (int) (Math.random() * 6);
+        while ( !validMove(col) )
+        {
+            col = (int) (Math.random() * 6);
+        }
+        placeMove(col, p.getMark());
+    }
 	
 	/**
 	 * Checks to see if the move entered is valid. 

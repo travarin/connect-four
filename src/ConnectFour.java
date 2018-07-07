@@ -16,7 +16,9 @@ public class ConnectFour
         Gameboard board       = new Gameboard();
         boolean   keepPlaying = true;
         Scanner   rdIn        = new Scanner(System.in);
-        board.start();
+        System.out.println("Play with computer? Enter Y/N: ");
+        boolean computer = rdIn.next().charAt(0) == 'Y' ? true : false;
+        board.start(computer);
         while ( keepPlaying )
         {
             while ( !board.gameOver() )
